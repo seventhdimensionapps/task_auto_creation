@@ -1,0 +1,61 @@
+<odoo>
+
+
+        <record id="sale_subscription_recurrance_inherit" model="ir.ui.view">
+            <field name="name">sale_subscription_recurrance_inherit</field>
+            <field name="model">sale.temporal.recurrence</field>
+            <field name="inherit_id" ref="sale_temporal.sale_temporal_recurrence_view_tree"/>
+            <field name="arch" type="xml">
+                 <field name="unit" position="after">
+                    <field name="no_of_recurrence" string="No Of Recurrance"/>
+                </field>
+            </field>
+        </record>
+        
+          <record id="sale_subscription_primary_form_view_ext" model="ir.ui.view">
+        <field name="name">sale.subscription.order.form.ext</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_order_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='other_information']/group[1]/group[@name='sales_person']/field[@name='start_date'][2]"
+                   position="attributes">
+                <attribute name="attrs">{'invisible': [('is_subscription', '!=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='other_information']/group[1]/group[@name='sales_person']/field[@name='start_date'][1]"
+                   position="attributes">
+                <attribute name="attrs">{'invisible': [('is_subscription', '!=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//form[1]/sheet[1]/group[@name='sale_header']/group[@name='order_details']/div[@name='recurrence_block']/field[@name='end_date']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form[1]/sheet[1]/group[@name='sale_header']/group[@name='order_details']/div[@name='recurrence_block']/span"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_order']" position="after">
+                <field name="contract_start_date" required="1" attrs="{'invisible': [('is_subscription', '=', False)]}"/>
+                <field name="contract_end_date" attrs="{'invisible': [('is_subscription', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+  
+
+
+
+
+
+                <record id="sale_subscription_recurrance_inherit_from" model="ir.ui.view">
+                    <field name="name">sale_subscription_recurrance_inherit_from</field>
+                    <field name="model">sale.temporal.recurrence</field>
+                    <field name="inherit_id" ref="sale_temporal.sale_temporal_recurrence_view_form"/>
+                    <field name="arch" type="xml">
+                         <field name="unit" position="after">
+                            <field name="no_of_recurrence" string="No Of Recurrance"/>
+                        </field>
+                    </field>
+                </record>
+
+
+
+</odoo>
